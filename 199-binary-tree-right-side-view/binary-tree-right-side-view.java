@@ -14,37 +14,28 @@
  * }
  */
 class Solution {
-    static class Pair{
-        int vd;
-        TreeNode node;
-        Pair(int h,TreeNode n){
-            node = n;
-            vd = h;
-        }
-    }
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> ans = new ArrayList<>();
-        if(root==null)return ans;
-        Queue<Pair> q = new LinkedList<>();
-        TreeMap<Integer,Integer> map = new TreeMap<>();
-        q.offer(new Pair(0,root));
-        while(!q.isEmpty()){
-            Pair curr = q.poll();
-            int vd = curr.vd;
-            TreeNode node = curr.node;
-            if(!map.containsKey(vd)){
-                map.put(vd,node.val);
+    List<Integer> ans = new ArrayList<>();
+    if (root == null) return ans;
+
+    Queue<TreeNode> q = new LinkedList<>();
+    q.offer(root);
+
+    while (!q.isEmpty()) {
+        int size = q.size();
+
+        for (int i = 0; i < size; i++) {
+            TreeNode node = q.poll();
+
+            // last node of level
+            if (i == size - 1) {
+                ans.add(node.val);
             }
-            if(node.right!=null){
-                q.offer(new Pair(vd+1,node.right));
-            }
-            if(node.left!=null){
-                q.offer(new Pair(vd+1,node.left));
-            }
+
+            if (node.left != null) q.offer(node.left);
+            if (node.right != null) q.offer(node.right);
         }
-        for (int key : map.keySet()) {
-            ans.add(map.get(key));
-        }
-        return ans;
     }
-}
+
+    return ans;
+}}
