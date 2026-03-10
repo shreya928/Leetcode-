@@ -13,12 +13,9 @@ class Solution {
         if(head==null || head.next==null)return null;  
         ListNode prev = new ListNode(0);
         prev.next = head;
-        ListNode slow = head;
         ListNode fast = head;
-        int cnt = 1;
         while(fast!=null && fast.next!=null){
             fast = fast.next.next;
-            slow = slow.next;
             prev = prev.next;
         }
         prev.next = prev.next.next;
