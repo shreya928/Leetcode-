@@ -1,7 +1,6 @@
 class Solution {
     public int rob(int[] nums) {
         int n = nums.length;
-        int dp[] = new int[n];
         int prev1 = nums[0];
         int curr = prev1;
         int prev2 = -1;
