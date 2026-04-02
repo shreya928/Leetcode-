@@ -12,9 +12,7 @@ class Solution {
                 }
             }
         }
-        int len = dp[n][m];
-        int i= n;
-        int j=m;
+        int i = n, j = m;
         StringBuilder s = new StringBuilder("");
         while(i>0 && j>0){
             if(str1.charAt(i-1)==str2.charAt(j-1)){
