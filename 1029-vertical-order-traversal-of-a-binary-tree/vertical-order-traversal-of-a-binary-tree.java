@@ -35,13 +35,13 @@ class Solution {
             int col = tup.col;
             TreeNode node = tup.node;
 
-           if(!map.containsKey(col)){
-    map.put(col,new TreeMap<>());
-}
-if(!map.get(col).containsKey(row)){
-    map.get(col).put(row,new PriorityQueue<>());
-}
-map.get(col).get(row).offer(node.val);
+            if(!map.containsKey(col)){
+                map.put(col,new TreeMap<>());
+            }
+            if(!map.get(col).containsKey(row)){
+                map.get(col).put(row,new PriorityQueue<>());
+            }
+                map.get(col).get(row).offer(node.val);
 
             if(node.left!=null){
                 q.offer(new Tuple(row + 1, col - 1, node.left));
