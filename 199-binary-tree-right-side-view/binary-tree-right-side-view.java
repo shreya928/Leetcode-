@@ -14,20 +14,38 @@
  * }
  */
 class Solution {
-    public List<Integer> rightSideView(TreeNode root) {
-    List<Integer> ans = new ArrayList<>();
-    dfs(root, 0, ans);
-    return ans;
-}
-
-public void dfs(TreeNode root, int level, List<Integer> ans) {
-    if (root == null) return;
-
-    if (level == ans.size()) {
-        ans.add(root.val);
+    class Pair{
+        int idx;
+        TreeNode node;
+        public Pair(int i, TreeNode n){
+            this.idx = i;
+            this.node = n;
+        }
     }
+    public List<Integer> rightSideView(TreeNode root) {
+        ArrayList<Integer> ls = new ArrayList<>();
+        if(root==null)return ls;
+        TreeMap<Integer,TreeNode> map = new TreeMap<>();
+        Queue<Pair> q = new LinkedList<>();
+        
+        q.offer(new Pair(0,root));
+        while(!q.isEmpty()){
+            Pair curr = q.poll();
+            int idx = curr.idx;
+            TreeNode node = curr.node;
+            
+            map.put(idx,node);
 
-    dfs(root.right, level + 1, ans);
-    dfs(root.left, level + 1, ans);
-}
+            if(node.left!=null){
+                q.offer(new Pair(idx+1,node.left));
+            }
+            if(node.right!=null){
+                q.offer(new Pair(idx+1, node.right));
+            }
+        }
+        for(TreeNode n : map.values()){
+            ls.add(n.val);
+        }
+        return ls;
+    }
 }
