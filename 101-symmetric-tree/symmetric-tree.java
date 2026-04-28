@@ -14,14 +14,28 @@
  * }
  */
 class Solution {
-    public boolean isSame(TreeNode root1, TreeNode root2) {
-        if(root1==null || root2==null){
-            return root1==root2;
-        }
-        return (root1.val==root2.val) && isSame(root1.left,root2.right)&& isSame(root1.right,root2.left);
-    }
     public boolean isSymmetric(TreeNode root) {
-        if(root==null)return true;
-        return isSame(root.left,root.right);
+        if(root == null || (root.left==null && root.right==null))return true;
+        if(root.left==null || root.right==null)return false;
+        Queue<TreeNode> p = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        p.offer(root.left);
+        q.offer(root.right);
+        while(!p.isEmpty() && !q.isEmpty()){
+           TreeNode curr1 = p.poll();
+            TreeNode curr2 = q.poll();
+
+            if (curr1 == null && curr2 == null) continue;
+            if (curr1 == null || curr2 == null) return false;
+
+            if (curr1.val != curr2.val) return false;
+
+            p.offer(curr1.left);
+            p.offer(curr1.right);
+
+            q.offer(curr2.right);
+            q.offer(curr2.left);
+        }
+        return true;
     }
 }
