@@ -32,16 +32,17 @@ class Solution {
         while(!q.isEmpty()){
             int n = q.size();
             int first=0, last=0;
+            minIdx = q.peek().idx;
 
             for(int i=0; i<n; i++){
                 Pair pair = q.poll();
                 TreeNode node = pair.node;
-                int idx = pair.idx;
+                int idx = pair.idx - minIdx;
                 
-                if(i==0)first = minIdx =  idx;
+                if(i==0)first = idx;
                 if(i==n-1)last = idx;
-                if(node.left!=null)q.offer(new Pair(node.left,(idx-minIdx)*2+1));
-                if(node.right!=null)q.offer(new Pair(node.right,(idx-minIdx)*2+2));
+                if(node.left!=null)q.offer(new Pair(node.left,idx*2+1));
+                if(node.right!=null)q.offer(new Pair(node.right,idx*2+2));
             }
             maxWidth = Math.max(maxWidth, last-first+1);
         }
