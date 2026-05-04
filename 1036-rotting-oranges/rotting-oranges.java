@@ -14,14 +14,10 @@ class Solution {
         int n = grid[0].length;
         Queue<Pair> q = new LinkedList<>();
         int freshCnt = 0;
-        int vis[][] = new int[m][n];
         for(int i=0; i<m; i++){
             for(int j=0; j<n; j++){
                 if(grid[i][j]==2){
                     q.offer(new Pair(i,j,0));
-                    vis[i][j] = 2;
-                }else{
-                    vis[i][j]=0;
                 }
                 if(grid[i][j]==1){
                     freshCnt++;
@@ -41,9 +37,9 @@ class Solution {
             for(int k=0; k<4; k++){
                 int row = i + drow[k];
                 int col = j + dcol[k];
-                if(row>=0 && col>=0 && row<m && col<n && vis[row][col]==0 && grid[row][col]==1){
+                if(row>=0 && col>=0 && row<m && col<n && grid[row][col]==1){
                     q.offer(new Pair(row,col,t+1));
-                    vis[row][col] = 2;
+                    grid[row][col] = 2;
                     cnt++;
                 }
             }
