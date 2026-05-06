@@ -23,18 +23,18 @@ class Solution {
             len = p.len;
             if(curr.equals(endWord))return len;
 
-            StringBuilder sb = new StringBuilder(curr);
-            for(int i=0; i<curr.length(); i++){
-                char original = curr.charAt(i);
-                for(int j=0; j<26; j++){
-                    sb.setCharAt(i, (char)('a' + j));
-                    String nextWord = sb.toString();
+            char[] arr = curr.toCharArray();
+            for(int i=0; i<arr.length; i++){
+                char original = arr[i];
+                for(char ch='a'; ch<='z'; ch++){
+                    arr[i] = ch;
+                    String nextWord = new String(arr);
                     if(set.contains(nextWord)){
                         q.offer(new Pair(nextWord,len+1));
                         set.remove(nextWord);
                     }
                 }
-                sb.setCharAt(i, original); 
+                arr[i] = original; 
             }
         }
         return 0;
