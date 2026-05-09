@@ -11,9 +11,9 @@ class Solution {
         PriorityQueue<Pair> pq = new PriorityQueue<>(
             (a, b) -> {
                 if (a.val == b.val) {
-                    return a.str.compareTo(b.str); // lexicographically smaller first
+                    return b.str.compareTo(a.str); // lexicographically larger first
                 }
-                return Integer.compare(b.val, a.val); // higher freq first
+                return Integer.compare(a.val, b.val); // lower  freq first
             }
         );
         HashMap<String,Integer> map = new HashMap<>();
@@ -22,13 +22,14 @@ class Solution {
         }
         for(Map.Entry<String,Integer> e : map.entrySet()){
             pq.offer(new Pair(e.getKey(),e.getValue()));
+            if(pq.size()>k)pq.poll();
         }
         List<String> ls = new ArrayList<>();
-        while(k>0){
-            Pair p = pq.poll();
-            ls.add(p.str);
+        while(!pq.isEmpty()){
+            ls.add(pq.poll().str);
             k--;
         }
+        Collections.reverse(ls);
         return ls;
     }
 }
