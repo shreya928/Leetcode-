@@ -1,8 +1,8 @@
 class Solution {
     class Pair{
         int idx;
-        double dist;
-        public Pair(int idx, double dist){
+        int dist;
+        public Pair(int idx, int dist){
             this.idx = idx;
             this.dist = dist;
         }
@@ -10,12 +10,12 @@ class Solution {
     public int[][] kClosest(int[][] points, int k) {
         int ans[][] = new int[k][2];
         PriorityQueue<Pair> pq = new PriorityQueue<>(
-            (a, b) -> Double.compare(b.dist, a.dist)
+            (a, b) -> Integer.compare(b.dist, a.dist)
         );
         for(int i=0; i<points.length; i++){
             int x = points[i][0];
             int y = points[i][1];
-            double distance = x * x + y * y;
+            int distance = x * x + y * y;
             pq.offer(new Pair(i,distance));
             if(pq.size()>k){
                 pq.poll();
