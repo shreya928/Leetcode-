@@ -15,7 +15,7 @@ class Solution {
         for(int i=0; i<points.length; i++){
             int x = points[i][0];
             int y = points[i][1];
-            double distance = Math.sqrt(x * x + y * y);
+            double distance = x * x + y * y;
             pq.offer(new Pair(i,distance));
             if(pq.size()>k){
                 pq.poll();
