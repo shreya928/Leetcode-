@@ -15,9 +15,12 @@ class Solution {
             calculate(s, ans, curr, idx+1);
             curr.deleteCharAt(curr.length() - 1);
         }else{
-            calculate(s, ans, curr.append(Character.toLowerCase(ch)), idx+1);
+            curr.append(Character.toLowerCase(ch));
+            calculate(s, ans,curr , idx+1);
             curr.deleteCharAt(curr.length() - 1);
-            calculate(s, ans, curr.append(Character.toUpperCase(ch)), idx+1);
+
+            curr.append(Character.toUpperCase(ch));
+            calculate(s, ans, curr, idx+1);
             curr.deleteCharAt(curr.length() - 1);
         }
     }
