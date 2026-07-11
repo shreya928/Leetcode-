@@ -1,45 +1,32 @@
-import java.util.*;
-
 class Solution {
     public List<Integer> largestDivisibleSubset(int[] nums) {
-        int n = nums.length;
         Arrays.sort(nums);
-
-        int[] dp = new int[n];
-        int[] parent = new int[n];
-
-        Arrays.fill(dp, 1);
-
-        int maxLen = 1;
-        int lastIndex = 0;
-
-        for (int i = 0; i < n; i++) {
-            parent[i] = i;
-
-            for (int prev = 0; prev < i; prev++) {
-                if (nums[i] % nums[prev] == 0 && dp[prev] + 1 > dp[i]) {
-                    dp[i] = dp[prev] + 1;
-                    parent[i] = prev;
+        int n = nums.length;
+        int dp[] = new int[n];
+        int par[] = new int[n];
+        int lastidx=0;
+        int maxlen=1;
+        Arrays.fill(dp,1);
+        for(int i=0; i<n; i++){
+            par[i] = i;
+            for(int prev=0; prev<i; prev++){
+                if(nums[prev]%nums[i]==0 || nums[i]%nums[prev]==0 && dp[prev]+1>dp[i]){
+                    dp[i] = dp[prev]+1;
+                    par[i] = prev;
                 }
             }
-
-            if (dp[i] > maxLen) {
-                maxLen = dp[i];
-                lastIndex = i;
+            if(dp[i]>maxlen){
+                maxlen = dp[i];
+                lastidx = i;
             }
         }
-
-        // reconstruct subset
-        List<Integer> result = new ArrayList<>();
-
-        while (parent[lastIndex] != lastIndex) {
-            result.add(nums[lastIndex]);
-            lastIndex = parent[lastIndex];
+        List<Integer> ls = new ArrayList<>();
+        while(par[lastidx] != lastidx){
+            ls.add(nums[lastidx]);
+            lastidx = par[lastidx];
         }
-
-        result.add(nums[lastIndex]);
-
-        Collections.reverse(result);
-        return result;
+        ls.add(nums[lastidx]);
+        Collections.reverse(ls);
+        return ls;
     }
 }
