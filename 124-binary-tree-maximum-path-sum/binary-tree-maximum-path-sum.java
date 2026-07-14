@@ -19,7 +19,7 @@ class Solution {
         if(root==null)return 0;
         int ls = Math.max(0,helper(root.left));
         int rs = Math.max(0,helper(root.right));
-        maxSum = Math.max(maxSum, root.val + ls + rs);
+        maxSum = Math.max(root.val+ls+rs,maxSum);
         return root.val + Math.max(ls,rs);
     }
     public int maxPathSum(TreeNode root) {
