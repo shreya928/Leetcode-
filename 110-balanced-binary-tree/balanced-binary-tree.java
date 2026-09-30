@@ -20,7 +20,8 @@ class Solution {
         int lh = helper(root.left);
         int rh = helper(root.right);
         if(Math.abs(lh-rh)>1)isBalanced = false;
-        return 1 + Math.max(lh,rh);
+        int maxHt = Math.max(lh,rh);
+        return maxHt+1;
     }
     public boolean isBalanced(TreeNode root) {
         helper(root);
